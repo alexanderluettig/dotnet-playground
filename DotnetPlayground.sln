@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.MinimalApi", "Dotnet.Playground.MinimalApi\Dotnet.Playground.MinimalApi.csproj", "{40B237EA-1792-41A2-9EF6-07AEAF91545B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.Webcrawler", "Dotnet.Playground.Webcrawler\Dotnet.Playground.Webcrawler.csproj", "{9B541A7F-C9E1-4903-8B4E-B90478974921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.Persistence", "Dotnet.Playground.Persistence\Dotnet.Playground.Persistence.csproj", "{F0D40270-331C-458F-B509-48C676E9082F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B541A7F-C9E1-4903-8B4E-B90478974921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B541A7F-C9E1-4903-8B4E-B90478974921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B541A7F-C9E1-4903-8B4E-B90478974921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B541A7F-C9E1-4903-8B4E-B90478974921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0D40270-331C-458F-B509-48C676E9082F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D40270-331C-458F-B509-48C676E9082F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D40270-331C-458F-B509-48C676E9082F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D40270-331C-458F-B509-48C676E9082F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
