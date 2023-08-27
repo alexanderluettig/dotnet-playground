@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet.Playground.Persistence;
 public class PlaygroundContext : DbContext

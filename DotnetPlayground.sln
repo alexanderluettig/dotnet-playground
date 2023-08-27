@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.MinimalApi", "Dotnet.Playground.MinimalApi\Dotnet.Playground.MinimalApi.csproj", "{40B237EA-1792-41A2-9EF6-07AEAF91545B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.WebApi", "Dotnet.Playground.WebApi\Dotnet.Playground.WebApi.csproj", "{FE2B3861-973F-45AB-825B-082B49C532BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B237EA-1792-41A2-9EF6-07AEAF91545B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2B3861-973F-45AB-825B-082B49C532BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2B3861-973F-45AB-825B-082B49C532BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2B3861-973F-45AB-825B-082B49C532BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2B3861-973F-45AB-825B-082B49C532BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
