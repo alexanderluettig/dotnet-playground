@@ -39,6 +39,10 @@ Console.WriteLine(json);
 async Task<HtmlDocument> GetHtmlAsync(string url)
 {
     var httpClient = new HttpClient();
+    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html");
+    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36");
+    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "UTF-8");
+    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", "de-DE");
     var html = await httpClient.GetStringAsync(url);
 
     HtmlDocument htmlSnippet = new();
