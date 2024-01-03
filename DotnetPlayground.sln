@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.MinimalAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.Currencies", "Other\Dotnet.Playground.Currencies\Dotnet.Playground.Currencies.csproj", "{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.SignalR.Stocks", "SignalR\Dotnet.Playground.SignalR.Stocks\Dotnet.Playground.SignalR.Stocks.csproj", "{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,5 +83,6 @@ Global
 		{EDE1C1F6-DA45-45D8-A11A-42150030475F} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
 		{64C75F58-7F56-4B4D-AF8B-24F000EEF9D1} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
 		{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
+		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF} = {9BBDB39F-8A67-4892-88CE-B563A1D9F6F0}
 	EndGlobalSection
 EndGlobal

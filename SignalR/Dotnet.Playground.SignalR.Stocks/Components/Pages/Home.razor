@@ -1,0 +1,79 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.SignalR.Client
+
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+@implements IAsyncDisposable
+
+<PageTitle>Home</PageTitle>
+
+<LineChart @ref="lineChart" Width="800" Class="mb-4" />
+
+@code {
+    private HubConnection? hubConnection;
+    private List<Decimal> prices = [];
+    private LineChart lineChart = default!;
+    private LineChartOptions lineChartOptions = default!;
+    private ChartData chartData = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        chartData = new ChartData
+            {
+                Labels = prices.Select((e, i) => i.ToString()).ToList(),
+                Datasets = GenerateDataSets()
+            };
+        lineChartOptions = new() { Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index } };
+
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(Navigation.ToAbsoluteUri("/stocks"))
+        .Build();
+
+        hubConnection.On<decimal>("UpdateStockPrice", (stockPrice) =>
+        {
+            prices.Add(stockPrice);
+            chartData = new ChartData
+                {
+                    Labels = prices.Select((e, i) => i.ToString()).ToList(),
+                    Datasets = GenerateDataSets()
+                };
+            lineChart.UpdateAsync(chartData, lineChartOptions);
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await lineChart.InitializeAsync(chartData, lineChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+
+
+    private List<IChartDataset> GenerateDataSets()
+    {
+        var dataset = new LineChartDataset()
+            {
+                Label = "Stock Price",
+                Data = prices.Select(e => (double)e).ToList(),
+            };
+
+        return new List<IChartDataset> { dataset };
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}
