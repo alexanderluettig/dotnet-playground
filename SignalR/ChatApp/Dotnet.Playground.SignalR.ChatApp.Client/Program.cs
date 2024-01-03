@@ -13,6 +13,9 @@ await connection.StartAsync();
 
 Console.WriteLine("Please enter your name:");
 var name = Console.ReadLine();
+Console.WriteLine("Please enter the room you want to join:");
+var room = Console.ReadLine();
+await connection.SendAsync("Connect", name, room);
 
 while (true)
 {
