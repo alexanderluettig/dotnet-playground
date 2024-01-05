@@ -27,6 +27,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.Currencie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.SignalR.Stocks", "SignalR\Dotnet.Playground.SignalR.Stocks\Dotnet.Playground.SignalR.Stocks.csproj", "{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.ConsoleApp", "Other\Dotnet.Playground.ConsoleApp\Dotnet.Playground.ConsoleApp.csproj", "{869AE814-C598-4035-856F-5546844213F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationSystem", "NotificationSystem", "{A3681324-7365-409A-AF2C-A8E100AB3290}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.SignalR.NotificationSystem.Server", "SignalR\NotificationSystem\Dotnet.Playground.SignalR.NotificationSystem.Server\Dotnet.Playground.SignalR.NotificationSystem.Server.csproj", "{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Playground.SignalR.NotificationSystem.Client", "SignalR\NotificationSystem\Dotnet.Playground.SignalR.NotificationSystem.Client\Dotnet.Playground.SignalR.NotificationSystem.Client.csproj", "{78160465-699F-47EC-9A2A-FC42C792AB06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +77,18 @@ Global
 		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{869AE814-C598-4035-856F-5546844213F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{869AE814-C598-4035-856F-5546844213F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{869AE814-C598-4035-856F-5546844213F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{869AE814-C598-4035-856F-5546844213F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78160465-699F-47EC-9A2A-FC42C792AB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78160465-699F-47EC-9A2A-FC42C792AB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78160465-699F-47EC-9A2A-FC42C792AB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78160465-699F-47EC-9A2A-FC42C792AB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +104,9 @@ Global
 		{64C75F58-7F56-4B4D-AF8B-24F000EEF9D1} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
 		{C1ECCBCD-9FFE-4C6D-B6E2-24EDF0F9AD9C} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
 		{570BDF3C-42C5-4BD9-BA20-598A694B6CDF} = {9BBDB39F-8A67-4892-88CE-B563A1D9F6F0}
+		{869AE814-C598-4035-856F-5546844213F1} = {433ABF9F-2E09-4FF9-82EE-8BC001BD82A0}
+		{A3681324-7365-409A-AF2C-A8E100AB3290} = {9BBDB39F-8A67-4892-88CE-B563A1D9F6F0}
+		{27E3BAB7-3FF5-4F6C-87EB-2B1484A85DDD} = {A3681324-7365-409A-AF2C-A8E100AB3290}
+		{78160465-699F-47EC-9A2A-FC42C792AB06} = {A3681324-7365-409A-AF2C-A8E100AB3290}
 	EndGlobalSection
 EndGlobal

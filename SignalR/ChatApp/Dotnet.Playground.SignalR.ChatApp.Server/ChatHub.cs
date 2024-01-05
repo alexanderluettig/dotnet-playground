@@ -2,7 +2,7 @@
 
 namespace Dotnet.Playground.SignalR.ChatApp.Server;
 
-public class ChatHub() : Hub
+public class ChatHub : Hub
 {
     private static readonly Dictionary<string, User> _users = [];
 

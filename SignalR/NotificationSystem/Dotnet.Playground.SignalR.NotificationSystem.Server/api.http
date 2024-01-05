@@ -1,0 +1,10 @@
+@Address = http://localhost:5176
+
+## Send Notification
+POST {{Address}}/notification
+Content-Type: application/json
+
+{
+    "title": "Notification Title",
+    "message": "Notification Message"
+}
