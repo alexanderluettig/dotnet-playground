@@ -1,0 +1,123 @@
+﻿@page "/"
+
+@using Microsoft.AspNetCore.SignalR.Client
+
+@rendermode InteractiveServer
+
+@implements IAsyncDisposable
+
+@inject NavigationManager NavigationManager
+
+
+<PageTitle>Home</PageTitle>
+
+@if (hubConnection is not null)
+{
+    <div class="pb-3">
+        <h1>Create Survey</h1>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" @bind="Name" />
+        </div>
+        <div class="form-group pt-3">
+            <label for="question">Question</label>
+            <input type="text" class="form-control" id="question" placeholder="Enter question" @bind="Question" />
+        </div>
+        <div class="pt-3 pb-3">
+            <button type="submit" class="btn btn-primary" @onclick="CreateSurvey">Submit</button>
+        </div>
+
+        @foreach (var answer in Answers.Select((value, index) => (value, index)))
+        {
+            <div class="form-group">
+                <label for="answer">Answer</label>
+                <input type="text" class="form-control" id="answer" placeholder="Enter answer" value=""
+                    @onchange="(e) => ChangeAnswer(answer.index, e.Value?.ToString() ?? string.Empty)" />
+            </div>
+        }
+        <div class="pt-2">
+            <button type="submit" class="btn btn-primary" @onclick="AddAnswer">Add answer</button>
+        </div>
+    </div>
+}
+
+<div>
+    <h1>Surveys</h1>
+
+    @foreach (var survey in surveyData)
+    {
+        <div class="pb-2">
+            <div class="card">
+                <div class="card-header">
+                    @survey.Name
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@survey.Question</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private HubConnection? hubConnection;
+
+    private IEnumerable<SurveyData> surveyData = [];
+
+    private string? Name { get; set; }
+    private string? Question { get; set; }
+    private IList<string> Answers { get; set; } = [""];
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(NavigationManager.ToAbsoluteUri("/surveys"))
+        .Build();
+
+        hubConnection.On<IEnumerable<SurveyData>>("TransferSurveyData", (surveyData) =>
+        {
+            this.surveyData = surveyData;
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+
+    public void CreateSurvey()
+    {
+        if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Question) && Answers.Where(x =>
+        !string.IsNullOrEmpty(x)).Any())
+        {
+            hubConnection!.InvokeAsync("CreateSurvey", new SurveyData
+                {
+                    Name = Name,
+                    Question = Question,
+                    Answers = Answers
+                .Where(x => !string.IsNullOrEmpty(x))
+                .ToDictionary(x => x, x => 0)
+                });
+
+            Name = string.Empty;
+            Question = string.Empty;
+            Answers = [""];
+        }
+    }
+
+    public void AddAnswer()
+    {
+        Answers.Add("");
+    }
+
+    public void ChangeAnswer(int index, string value)
+    {
+        Answers[index] = value;
+    }
+}
