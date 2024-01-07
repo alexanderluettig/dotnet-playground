@@ -1,0 +1,87 @@
+﻿@page "/survey/{SurveyName}"
+
+@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.SignalR.Client
+
+@inject NavigationManager NavigationManager
+
+@implements IAsyncDisposable
+
+@if (surveyData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>@surveyData.Name</h3>
+    <p>@surveyData.Question</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Answer</th>
+                <th>Count</th>
+                <th>Percentage</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var answer in surveyData.Answers)
+            {
+                <tr>
+                    <td>@answer.Key</td>
+                    <td>@answer.Value</td>
+                    <td>@{
+                            @(answer.Value * 100 / Math.Max(surveyData.Answers.Values.Sum(), 1))
+                        }%</td>
+                    <td>
+                        <button class="btn btn-primary" disabled="@answered"
+                            @onclick="() => SendAnswer(answer.Key)">Vote</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    public required string SurveyName { get; set; }
+    public bool answered = false;
+    private HubConnection? hubConnection;
+    private SurveyData? surveyData;
+
+    protected async override Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(NavigationManager.ToAbsoluteUri("/surveys"))
+        .Build();
+
+        hubConnection.On<SurveyData>("ReceiveSurveyData", (surveyData) =>
+        {
+            this.surveyData = surveyData;
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+        await hubConnection.SendAsync("FetchData", SurveyName);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+
+    private void SendAnswer(string answer)
+    {
+        if (hubConnection is not null)
+        {
+            hubConnection.SendAsync("UpdateAnswer", SurveyName, answer);
+            answered = true;
+        }
+    }
+}

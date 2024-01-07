@@ -1,37 +1,30 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Dotnet.Playground.SignalR.Survey.Database;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet.Playground.SignalR.Survey.Hubs;
 
 public class SurveyHub : Hub
 {
-    private IEnumerable<SurveyData> _surveyData = [ new SurveyData
-    {
-        Name = "Survey 1",
-        Question = "What is your favorite color?",
-        Answers = new Dictionary<string, int>
-        {
-            { "Red", 0 },
-            { "Blue", 0 },
-            { "Green", 0 },
-            { "Yellow", 0 },
-            { "Orange", 0 },
-            { "Purple", 0 },
-            { "Black", 0 },
-            { "White", 0 },
-            { "Pink", 0 },
-            { "Brown", 0 },
-        }
-    }];
+    private readonly SurveyContext _surveyContext;
 
-    public override async Task OnConnectedAsync()
+    public SurveyHub(SurveyContext surveyContext)
     {
-        await Clients.Caller.SendAsync("TransferSurveyData", _surveyData);
+        _surveyContext = surveyContext;
     }
 
-    public async Task CreateSurvey(SurveyData surveyData)
+    public async Task FetchData(string surveyName)
     {
-        _surveyData = _surveyData.Append(surveyData);
-        Console.WriteLine($"Survey created: {surveyData.Name}");
-        await Clients.All.SendAsync("TransferSurveyData", _surveyData);
+        var surveyData = await _surveyContext.Surveys.FirstOrDefaultAsync(s => s.Name == surveyName) ?? throw new Exception("Survey not found");
+        await Clients.Caller.SendAsync("ReceiveSurveyData", surveyData);
+    }
+
+    public async Task UpdateAnswer(string surveyName, string answer)
+    {
+        var surveyData = await _surveyContext.Surveys.FirstOrDefaultAsync(s => s.Name == surveyName) ?? throw new Exception("Survey not found");
+        surveyData.Answers[answer] = surveyData.Answers[answer] + 1;
+        await _surveyContext.SaveChangesAsync();
+
+        await Clients.All.SendAsync("ReceiveSurveyData", surveyData);
     }
 }

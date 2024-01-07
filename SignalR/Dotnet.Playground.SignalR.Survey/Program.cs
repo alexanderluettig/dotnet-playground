@@ -1,5 +1,7 @@
 using Dotnet.Playground.SignalR.Survey.Components;
+using Dotnet.Playground.SignalR.Survey.Database;
 using Dotnet.Playground.SignalR.Survey.Hubs;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSignalR();
+builder.Services.AddDbContext<SurveyContext>(options =>
+{
+    options.UseSqlServer("Server=localhost,1433;Database=surveys;User ID=sa;Password=P@ssword123;Trust Server Certificate=True");
+});
 
 var app = builder.Build();
 
@@ -19,6 +25,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapHub<CreateSurveyHub>("/createsurveys");
 app.MapHub<SurveyHub>("/surveys");
 
 app.UseHttpsRedirection();

@@ -49,7 +49,9 @@
         <div class="pb-2">
             <div class="card">
                 <div class="card-header">
-                    @survey.Name
+                    <a href="/survey/@survey.Name">
+                        @survey.Name
+                    </a>
                 </div>
                 <div class="card-body">
                     <p class="card-text">@survey.Question</p>
@@ -66,12 +68,12 @@
 
     private string? Name { get; set; }
     private string? Question { get; set; }
-    private IList<string> Answers { get; set; } = [""];
+    private IList<string> Answers { get; set; } = ["", ""];
 
     protected override async Task OnInitializedAsync()
     {
         hubConnection = new HubConnectionBuilder()
-        .WithUrl(NavigationManager.ToAbsoluteUri("/surveys"))
+        .WithUrl(NavigationManager.ToAbsoluteUri("/createsurveys"))
         .Build();
 
         hubConnection.On<IEnumerable<SurveyData>>("TransferSurveyData", (surveyData) =>
@@ -94,9 +96,9 @@
     public void CreateSurvey()
     {
         if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Question) && Answers.Where(x =>
-        !string.IsNullOrEmpty(x)).Any())
+        !string.IsNullOrEmpty(x)).Count() >= 2)
         {
-            hubConnection!.InvokeAsync("CreateSurvey", new SurveyData
+            hubConnection!.SendAsync("CreateSurvey", new SurveyData
                 {
                     Name = Name,
                     Question = Question,
@@ -107,7 +109,7 @@
 
             Name = string.Empty;
             Question = string.Empty;
-            Answers = [""];
+            Answers = ["", ""];
         }
     }
 
